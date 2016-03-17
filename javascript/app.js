@@ -8,7 +8,7 @@ var messageField = $('#chatTextInput');
 var nameField = $('#nameInput');
 var messageList = $('#chat')
 
-
+$("#questionDisplay").translate('spanish')
 
 messageField.keydown(function (e) {
    
