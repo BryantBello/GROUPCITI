@@ -71,8 +71,13 @@ window.onload=function(){
 rssfeedsetup()
 }
 
+$(document).ready(function(){
+
+$.backstretch('images/usabridge.jpg');
 
 
+
+})
 
 
 

@@ -1,9 +1,6 @@
-.jumbotron {
-	background-image: url("../images/usabridge.jpg");
-	background-size: cover ;
-	height:600px;
-	
+img{
 
+	height: 400px;
 }
 
 #testPanel {
@@ -32,4 +29,21 @@
 #possibleAnswers {
 
 	height: 250px;
+}
+
+#body{
+
+	background-color:#CCFFCC;
+}
+#nav{
+
+	background-color: #0099CC;
+}
+
+#topPanel{
+	height:100px;
+}
+#topText{
+	position:relative;
+	top:9px;
 }
