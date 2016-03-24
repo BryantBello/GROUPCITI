@@ -16,7 +16,7 @@
 }
 
 #chat{
-	height:200px;
+	height:300px;
 	overflow: scroll;
 }
 
@@ -25,14 +25,7 @@
 	height: 250px;
 }
 
-#body{
 
-	background-color:#CCFFCC;
-}
-#nav{
-
-	background-color: #0099CC;
-}
 
 #topPanel{
 	height:100px;
