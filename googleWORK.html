@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Google Translate Test</title>
+</head>
+<body>
+    <div class="destination">
+        <p>This is some text already on the page that could be translated by the Google Translate Web Element. <a href="#" class="loadMore">Load More</a></p>
+    </div>
+    <div id="google_translate_element"></div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+        };
+
+        $(function () {
+            $(".loadMore").click(function () {
+                $("<p/>", {
+                    text: "This is some injected text that will not be translated."
+                }).appendTo($(".destination"));
+            });
+            $.getScript("//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
+        });
+    </script>
+</body>
+</html>
