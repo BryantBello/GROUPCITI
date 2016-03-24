@@ -1,0 +1,35 @@
+.jumbotron {
+	background-image: url("../images/usabridge.jpg");
+	background-size: cover ;
+	height:600px;
+	
+
+}
+
+#button{
+	display: block;
+	width: 90%;
+	height: 50%;
+	text-align: left;
+}
+#testPanel {
+	height:400px;
+}
+
+#communityChat {
+
+	height:400px;
+}
+
+#welcome{
+
+	position:relative;
+	top: 390px;
+	left:-40px;
+
+}
+
+#chat{
+	height:200px;
+	overflow: scroll;
+}

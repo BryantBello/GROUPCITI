@@ -1,4 +1,13 @@
-//Array of questions
+
+
+var messagesRef = new Firebase("https://bridgeschat.firebaseio.com/");
+
+
+
+var messageField = $('#chatTextInput');
+var nameField = $('#nameInput');
+var messageList = $('#chat');
+
 var questions = [{//1
   question: "What is the supreme law of the land?",
   answers: ["A: Supreme Court", "B: Bill of Rights", "C: Declaration of Independence", "D: Constitution"],
@@ -8,7 +17,7 @@ var questions = [{//1
   answers: ["A: Congress", "B: Dictator", "C: Prime Minister", "D: Prisons"],
   correctAnswer: "A: Congress"
 }, {//3
-  question: "What stops one branch of government from becoming too powerful",
+  question: "What stops one branch of government from becoming too powerful?",
   answers: ["A: Bill of Rights", "B: Checks and balances", "C: Speration of powers", "D: B and C"],
   correctAnswer: "D: B and C"
 }, {//4
@@ -56,7 +65,7 @@ var questions = [{//1
   answers: ["A: 50", "B: 100", "C: 200", "D: 435"],
   correctAnswer: "B: 100"
 }, {//15
-  question: "Whhat is one responsibility that is only for United States citizens?",
+  question: "What is one responsibility that is only for United States citizens?",
   answers: ["A: Pay federal taxes", "B: Pay state taxes", "C: Serve on a jury", "D: Obtain a drivers liscence"],
   correctAnswer:  "C: Serve on a jury"
 }, {//16
@@ -72,11 +81,11 @@ var questions = [{//1
   answers: ["A: John F Kennedy", "B: Theodore Roosevelt", "C: Woodrow Wilson", "D: Herbert Hoover"],
   correctAnswer: "C: Woodrow Wilson"
 }, {//19
-  question: "Wehat ocean is on the West Coast of the United States?",
+  question: "What ocean is on the West Coast of the United States?",
   answers: ["A: Indian", "B: Atlantic", "C: Arctic", "D: Pacific"],
   correctAnswer: "D: Pacific"
 }, {//20
-  question: "We elect a U.S. Senator for how mnay years?",
+  question: "We elect a U.S. Senator for how many years?",
   answers: ["A: 2", "B: 4", "C: 6", "D: 10"],
   correctAnswer: "C: 6"
 }, {//21
@@ -124,7 +133,7 @@ var questions = [{//1
   answers: ["A: A change(to the Constitution)", "B: An addition(to the Constitution", "C: Both A and B", "D: None of the above"],
   correctAnswer: "C: Both A and B"
 }, {//32
-  question: "We elect a President for how mnay years?",
+  question: "We elect a President for how many years?",
   answers: ["A: 2", "B: 4", "C: 6", "D: 10"],
   correctAnswer: "B: 4"
 }, {//33
@@ -156,12 +165,12 @@ var questions = [{//1
   answers: ["A: Congress", "B: The House of Representatives", "C: The Senate", "D: The President"],
   correctAnswer: "John Roberts"
 }, {//40
-  question: "Under our Constitution, some powers belong to the federal government. What is one power of the federal government?",
+  question: "Name one U.S. territory.",
   answers: ["A: Puerto Rico", "B: The Caribbean", "C: The Canary Islands", "D: Cuba"],
-  correctAnswer: "D: Cuba"
+  correctAnswer: "A: Puerto Rico"
 }, {//41
   question: "Name one state that borders Canada",
-  answers: ["A: California", "B: south Dakota", "C: New York", "D: Maryland"],
+  answers: ["A: California", "B: South Dakota", "C: New York", "D: Maryland"],
   correctAnswer: "C: New York"
 }, {//42
   question: "What do we call the first ten ammendments to the Constitution?",
@@ -401,3 +410,190 @@ var questions = [{//1
   correctAnswer: "A: September 17, 1787"
  }];
 
+
+//generate a random question
+var questionNumber = 0;
+var correct = 0;
+var incorrect = 0;
+
+      function randomNum(){
+      questionNumber=Math.floor((Math.random()*99)+1);
+  }
+
+
+
+randomNum();
+console.log(questionNumber);
+
+//take number and call question and answers by index position
+function display(){
+      $("#panel").append("<h2>" + questions[questionNumber].question + "</h2>");
+      for (var i = 0; i<questions[this.questionNumber].answers.length; i++){
+      $("#panel").append("<button class='answer-button' id='button'" + "data-name='" + questions[this.questionNumber].answers[i] + "''>" + questions[this.questionNumber].answers[i]+ "</button>");
+
+    	}
+    }
+
+display();
+
+	  $("#panel").append("Correct answers: " + correct + "<br>" + "Incorrect answers: " + incorrect );
+
+      //$("#panel").append("Incorrect answers: " + incorrect);
+
+//on click function, display answer, comparison function, increment score totals, new question
+
+$(document).on("click", ".answer-button", function(e) {
+	
+	if ($(e.target).data("name") === questions[questionNumber].correctAnswer){
+    	$("#panel").append("<h2>Correct!!!!</h2>");
+    	correct++;
+    } else {
+   	    $("#panel").append("<h2> The correct answer is " + questions[questionNumber].correctAnswer + "</h2>");
+     	incorrect++;
+    }
+  console.log(correct);
+  console.log(incorrect);
+});
+
+
+var languages = [{//1
+  language: "Espanol",
+  value: "en-es"
+}, {//2
+  language: "Francais",
+  value: "en-fr"
+}, {//3
+  language: "Deutsche",
+  value: "en-de"
+}, {//4
+  language: "Pyccknn",
+  value: "en-ru"
+}, {//5
+  language: "Italiano",
+  value: "en-it"
+}];
+
+var source="";
+
+//take number and call question and answers by index position
+for (var i = 0; i<languages.length; i++) {
+      $("#panel").append("<button class='answer-button1' id='button' value='" + languages[i].value + " data-name='" 
+        + languages[i].language + "''>"  + languages[i].language + "</button>");
+    }
+$(document).on("click", '.answer-button1', function(e) {
+  source = 'https://www.googleapis.com/language/translate/v2?key=AIzaSyBGVNFrlzQURAt858e34_eOIwdyxzMqv0w&source=en&target=de&callback=translateText&q=' +  questions[questionNumber].question + $(event.target).attr("value");
+
+//console.log($(event.target).attr("value"));
+  console.log(source);
+});
+
+
+
+
+
+
+
+
+
+
+
+messageField.keydown(function (e) {
+   
+	if (e.keyCode == 13){
+		
+		$("#chatTextInput").focus();
+		var username = nameField.val();
+		var message = messageField.val();
+
+		messagesRef.push({name: username, text: message});
+		messageField.val('');
+
+	}
+
+});
+
+messagesRef.limitToLast(10).on('child_added',function(snapshot){
+
+	var data = snapshot.val();
+	var username = data.name || "anonymous";
+	var message = data.text; 
+
+	var messageElement = $("<div class='well well-sm'></div>");
+	var nameElement = $("<strong class='chatContent'></strong>");
+	nameElement.text(username + ": ");
+	messageElement.text(message).prepend(nameElement);
+
+	messageList.append(messageElement);
+
+	messageList[0].scrollTop = messageList[0].scrollHeight;
+
+
+
+});
+
+var feedcontainer= document.getElementById("newsFeed")
+var feedurl="http://rss.cnn.com/rss/edition_world.rss"
+var feedlimit=5
+var rssoutput="<b>Latest CNN World News:</b><br /><ul>"
+
+function rssfeedsetup(){
+var feedpointer = new google.feeds.Feed(feedurl) //Google Feed API method
+feedpointer.setNumEntries(feedlimit) //Google Feed API method
+feedpointer.load(displayfeed) //Google Feed API method
+}
+
+function displayfeed(result){
+if (!result.error){
+var thefeeds = result.feed.entries
+for (var i=0; i<thefeeds.length; i++)
+rssoutput+="<li><a href='" + thefeeds[i].link + "'>" + thefeeds[i].title + "</a></li>"
+rssoutput+="</ul>"
+feedcontainer.innerHTML=rssoutput
+}
+else
+alert("Error fetching feeds!")
+}
+
+window.onload=function(){
+rssfeedsetup()
+}
+
+
+
+
+
+
+
+//function translatedText(){
+//	var language = $("#selectLanguage").text();
+//	var sourceText = $("#responseDisplay").text();
+//	var queryUrl ='https://www.googleapis.com/language/translate/v2?key=AIzaSyBGVNFrlzQURAt858e34_eOIwdyxzMqv0w&source=en&target=decallback=translateText&q=' + sourceText;
+	
+//	$.ajax({url: queryUrl, method : 'GET'})
+//		.done(function(response){
+//			var result = response.data;
+
+//			$("#responseDisplay").text(translatedText);
+		
+//		console.log(JSON.stringify(queryUrl))
+
+//		});
+
+
+
+
+
+
+	
+//}
+
+
+
+$("#nameInput").focus();
+
+
+$("#translate").on('click',function(){
+
+	translatedText();
+
+});
